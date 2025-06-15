@@ -3,19 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/TransaksiDAO.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/transaksi.jsp</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/user.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/userDAO.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/TransaksiServlet.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/Transaksi.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/LaporanServlet.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/dashboard.jsp</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/laporan.jsp</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/register.jsp</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/profile.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/targetTabunganServlet.java</file>
             <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/LaporanDAO.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/LaporanServlet.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/laporan.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/transaksi.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/Transaksi.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/TransaksiDAO.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/Laporan.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/profile.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/dashboard.jsp</file>
         </group>
     </open-files>
 </project-private>

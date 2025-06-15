@@ -25,7 +25,7 @@ public class PengingatDAO {
     }
 
     public void insertPengingat(Pengingat p) throws SQLException {
-        String sql = "INSERT INTO pengingat (reminder_date, tagihan_id) VALUES (?, ?)";
+        String sql = "INSERT INTO pengingat (reminderDate, tagihan_id) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setDate(1, new java.sql.Date(p.getReminderDate().getTime()));
         ps.setInt(2, p.getTagihan().getId());
@@ -40,7 +40,7 @@ public class PengingatDAO {
 
         while (rs.next()) {
             int id = rs.getInt("id");
-            Date reminderDate = rs.getDate("reminder_date");
+            Date reminderDate = rs.getDate("reminderDate");
             int tagihanId = rs.getInt("tagihan_id");
 
             // Ambil tagihan terkait (bisa lewat DAO lain atau simpan map lokal)

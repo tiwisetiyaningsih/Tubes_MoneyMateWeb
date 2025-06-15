@@ -26,71 +26,79 @@ public class TagihanDAO {
     public TagihanDAO(Connection conn) {
         this.conn = conn;
     }
-//  public void tambahTagihan(Tagihan tagihan) {
-//        try (Connection conn = KoneksiDB.getConnection()) {
-//            String sql = "INSERT INTO tagihan (nama_tagihan, jumlah_tagihan, tanggal_due) VALUES (?, ?, ?)";
-//            PreparedStatement stmt = conn.prepareStatement(sql);
-//            stmt.setString(1, tagihan.getNamaTagihan());
-//            stmt.setDouble(2, tagihan.getJumlahTagihan());
-//            stmt.setDate(3, new java.sql.Date(tagihan.getTanggalDue().getTime()));
-//            stmt.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
    
-    public List<Tagihan> getAllTagihanWithReminder() throws SQLException {
+    public List<Tagihan> getAllTagihanWithReminder(int userId) throws SQLException {
         List<Tagihan> list = new ArrayList<>();
-        String query = "SELECT * FROM tagihan";
+        String query = "SELECT t.*, p.reminderDate FROM tagihan t LEFT JOIN pengingat p ON t.id = p.tagihan_id WHERE t.user_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Tagihan t = new Tagihan(
                 rs.getString("namaTagihan"),
                 rs.getDouble("jumlahTagihan"),
-                rs.getDate("tanggalDue")
+                rs.getDate("tanggalDue"),
+                rs.getInt("user_id")
             );
+            t.setReminderDate(rs.getDate("reminderDate"));
             t.setId(rs.getInt("id"));
             list.add(t);
         }
 
         return list;
     }
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    try (Connection conn = KoneksiDB.getConnection()) {
-        TagihanDAO dao = new TagihanDAO(conn);
-        List<Tagihan> list = dao.getAllWithReminder(); // PAKAI YANG DENGAN REMINDER
-        request.setAttribute("tagihanList", list);
-        request.getRequestDispatcher("tagihan.jsp").forward(request, response);
-    } catch (Exception e) {
-        throw new ServletException("Error saat mengambil data tagihan", e);
-    }
-}
+//protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//        throws ServletException, IOException {
+//    try (Connection conn = KoneksiDB.getConnection()) {
+//        TagihanDAO dao = new TagihanDAO(conn);
+//        List<Tagihan> list = dao.getAllWithReminder(); // PAKAI YANG DENGAN REMINDER
+//        request.setAttribute("tagihanList", list);
+//        request.getRequestDispatcher("tagihan.jsp").forward(request, response);
+//    } catch (Exception e) {
+//        throw new ServletException("Error saat mengambil data tagihan", e);
+//    }
+//}
 
 //
     // Tambah tagihan
     public void insertTagihan(Tagihan t) throws SQLException {
-        String query = "INSERT INTO tagihan (namaTagihan, jumlahTagihan, tanggalDue) VALUES (?, ?, ?)";
+        String query = "INSERT INTO tagihan (namaTagihan, jumlahTagihan, tanggalDue, user_id) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, t.getNamaTagihan());
         ps.setDouble(2, t.getJumlahTagihan());
         ps.setDate(3, new java.sql.Date(t.getTanggalDue().getTime()));
+        ps.setInt(4, t.getUser_id());
         ps.executeUpdate();
     }
+    
+    public void deleteTagihan(int id) throws SQLException {
+        String sqlDeleteReminder = "DELETE FROM pengingat WHERE tagihan_id = ?";
+        try (PreparedStatement ps1 = conn.prepareStatement(sqlDeleteReminder)) {
+            ps1.setInt(1, id);
+            ps1.executeUpdate();
+        }
+
+        String sqlDeleteTagihan = "DELETE FROM tagihan WHERE id = ?";
+        try (PreparedStatement ps2 = conn.prepareStatement(sqlDeleteTagihan)) {
+            ps2.setInt(1, id);
+            ps2.executeUpdate();
+            }
+        }   
+    
 //
-        public Tagihan getTagihanById(int id) throws SQLException {
-    String sql = "SELECT * FROM tagihan WHERE id = ?";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ps.setInt(1, id);
-    ResultSet rs = ps.executeQuery();
+    public Tagihan getTagihanById(int id) throws SQLException {
+        String sql = "SELECT * FROM tagihan WHERE id = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
 
     if (rs.next()) {
         Tagihan t = new Tagihan(
             rs.getString("namaTagihan"),
             rs.getDouble("jumlahTagihan"),
-            rs.getDate("tanggalDue")
+            rs.getDate("tanggalDue"),
+            rs.getInt("user_id")
         );
         t.setId(id); // Asumsikan setId sekarang pakai int
         return t;
@@ -99,9 +107,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
     return null; // Jika data tidak ditemukan
 }
 
-    private List<Tagihan> getAllWithReminder() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    private List<Tagihan> getAllWithReminder() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
         
     
 }

@@ -328,9 +328,13 @@
                             <span class="icon"><i class="fas fa-chart-pie"></i></span>
                             Dashboard
                         </a>
-                        <a href="#" class="active">
+                        <a href="transaksi.jsp" class="active">
                             <span class="icon"><i class="fas fa-wallet"></i></span>
                             Transactions
+                        </a>
+                        <a href="tagihan">
+                            <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
+                            Tagihan
                         </a>
                         <a href="laporan.jsp">
                             <span class="icon"><i class="fas fa-chart-simple"></i></span>

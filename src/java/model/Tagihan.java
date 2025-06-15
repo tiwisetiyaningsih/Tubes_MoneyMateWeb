@@ -19,10 +19,9 @@ public class Tagihan {
     private String namaTagihan;
     private double jumlahTagihan;
     private Date tanggalDue;
-
+    private int user_id;
     private Date reminderDate;
-
-public Date getReminderDate() {
+    public Date getReminderDate() {
     return reminderDate;
 }
 
@@ -31,10 +30,11 @@ public void setReminderDate(Date reminderDate) {
 }
 
     // Constructor tanpa ID (untuk saat tambah data baru)
-    public Tagihan(String namaTagihan, double jumlahTagihan, Date tanggalDue) {
+    public Tagihan(String namaTagihan, double jumlahTagihan, Date tanggalDue, int user_id) {
         this.namaTagihan = namaTagihan;
         this.jumlahTagihan = jumlahTagihan;
         this.tanggalDue = tanggalDue;
+        this.user_id = user_id;
     }
 
     // Getter dan Setter
@@ -48,6 +48,14 @@ public void setReminderDate(Date reminderDate) {
 
     public String getNamaTagihan() {
         return namaTagihan;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public void setNamaTagihan(String namaTagihan) {

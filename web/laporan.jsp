@@ -4,10 +4,29 @@
     Author     : Lenovo
 --%>
 
+<%@page import="model.Transaksi"%>
+<%@page import="model.TransaksiDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.text.NumberFormat, java.util.*, java.util.Locale" %>
 
 <!DOCTYPE html>
+<%
+    HttpSession sessionUser = request.getSession();
+    Integer userId = (Integer) sessionUser.getAttribute("id");
+
+    String filterTipe = request.getParameter("filterType");
+    String filterMonth = request.getParameter("filterMonth");
+
+    Calendar cal = Calendar.getInstance();
+    int month = (filterMonth != null && !filterMonth.isEmpty()) ? Integer.parseInt(filterMonth.split("-")[1]) : cal.get(Calendar.MONTH) + 1;
+    int year = (filterMonth != null && !filterMonth.isEmpty()) ? Integer.parseInt(filterMonth.split("-")[0]) : cal.get(Calendar.YEAR);
+
+    double pemasukan = TransaksiDAO.getTotalByUserMonthYearAndTipe(userId, month, year, "Pemasukan");
+    double pengeluaran = TransaksiDAO.getTotalByUserMonthYearAndTipe(userId, month, year, "Pengeluaran");
+    double saldo = pemasukan - pengeluaran;
+
+    List<Transaksi> transaksiListByFilter = TransaksiDAO.getTransaksiByUserAndFilter(userId, month, year, filterTipe);
+%>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -168,7 +187,7 @@
                         <h2>MoneyMate</h2>
                     </div>
                     <nav class="menu">
-                        <a href="dashboard.jsp" >
+                        <a href="dashboard.jsp">
                             <span class="icon"><i class="fas fa-chart-pie"></i></span>
                             Dashboard
                         </a>
@@ -176,15 +195,19 @@
                             <span class="icon"><i class="fas fa-wallet"></i></span>
                             Transactions
                         </a>
-                        <a href="anggaran.jsp">
-                            <span class="icon"><i class="fas fa-money-bill-alt"></i></span>
-                            Anggaran
+                        <a href="tagihan">
+                            <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
+                            Tagihan
                         </a>
                         <a href="laporan.jsp" class="active">
                             <span class="icon"><i class="fas fa-chart-simple"></i></span>
                             Laporan
                         </a>
-                        <a href="profile.jsp">
+                        <a href="targetTabungan.jsp">
+                            <span class="icon"><i class="fas fa-bullseye"></i></span>
+                            Target Tabungan
+                        </a>
+                        <a href="profile.jsp" >
                             <span class="icon"><i class="fas fa-user"></i></span>
                             Profile
                         </a>
@@ -201,25 +224,14 @@
             <main class="content">
                 <h2 class="c-h2">Laporan Keuangan</h2>
 
-                <%
-                    List<Map<String, Object>> transaksiList = (List<Map<String, Object>>) request.getAttribute("transaksiList");
-                    Double totalPemasukan = (Double) request.getAttribute("totalPemasukan");
-                    Double totalPengeluaran = (Double) request.getAttribute("totalPengeluaran");
-                    Double saldo = (Double) request.getAttribute("saldo");
-
-                    NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-                %>
-                
                 <c:if test="${not empty error}">
                     <p style="color:red;">${error}</p>
                 </c:if>
-                <%
-                    String filterMonth = request.getParameter("filterMonth"); // Ambil dari parameter GET
-                %>
+                
 
                 <form method="get" action="laporan.jsp" style="margin-bottom: 20px;">
                     <label for="filterMonth">Pilih Bulan:</label>
-                    <input type="month" name="filterMonth" id="filterMonth" value="<%= filterMonth != null ? filterMonth : "" %>">
+                    <input type="month" name="filterMonth" id="filterMonth" value="<%= filterMonth != null ? filterMonth : ""%>"/>
                     <button type="submit" style="background:#8d83ff; color:#fff; border:none; padding:8px 20px; border-radius:8px;">Tampilkan</button>
                 </form>
 
@@ -230,15 +242,37 @@
                         <th>Jenis</th>
                         <th>Jumlah</th>
                     </tr>
-                    <%
-                        if (transaksiList != null) {
-                            for (Map<String, Object> row : transaksiList) {
-                    %>
+                    
                     <tr>
-                        <td><%= row.get("tanggal")%></td>
-                        <td><%= row.get("deskripsi")%></td>
-                        <td><%= row.get("jenis")%></td>
-                        <td><%= nf.format(row.get("jumlah"))%></td>
+                        <%
+                            // Menampilkan semua transaksi
+                            List<Transaksi> transaksiList = transaksiListByFilter; // Mendapatkan semua transaksi
+                        %>
+                        <% if (transaksiList.isEmpty()) {%>
+                        <td>
+                            <div style="padding: 20px; font-size: 18px; color: gray;">
+                                Tidak ada transaksi untuk filter yang dipilih.
+                            </div>
+                        </td>
+                        <% } else {
+                            for (Transaksi transaksi : transaksiList) {
+                                String amountClass = "expense";
+                                String sign = "";
+
+                                if ("Pemasukan".equals(transaksi.getTipe())) {
+                                    amountClass = "income";
+                                    sign = "+";
+                                } else if ("Pengeluaran".equals(transaksi.getTipe())) {
+                                    amountClass = "expense";
+                                    sign = "-";
+                                }
+
+                                double absAmount = transaksi.getJumlah();
+                        %>
+                        <td><%= transaksi.getTanggal() %></td>
+                        <td><%= transaksi.getDeskripsi() %></td>
+                        <td><%= amountClass %></td>
+                        <td><%= sign %>Rp <%= String.format("%,d", (int) absAmount) %>.00</td>
                     </tr>
                     <%
                             }
@@ -250,15 +284,15 @@
                 <table class="summary-table">
                     <tr>
                         <td>Total Pemasukan</td>
-                        <td><%= totalPemasukan != null ? nf.format(totalPemasukan) : "Rp 0"%></td>
+                        <td>Rp <%= String.format("%,.2f", pemasukan)%>,-</td>
                     </tr>
                     <tr>
                         <td>Total Pengeluaran</td>
-                        <td><%= totalPengeluaran != null ? nf.format(totalPengeluaran) : "Rp 0"%></td>
+                        <td>Rp <%= String.format("%,.2f", pengeluaran)%>,-</td>
                     </tr>
                     <tr>
                         <td>Saldo Akhir</td>
-                        <td><%= saldo != null ? nf.format(saldo) : "Rp 0"%></td>
+                        <td>Rp <%= String.format("%,.2f", saldo) %>,-</td>
                     </tr>
                 </table>
             </main>

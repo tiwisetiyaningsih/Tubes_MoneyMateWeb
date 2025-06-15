@@ -86,11 +86,13 @@ public class TransaksiServlet extends HttpServlet {
         if ("delete".equals(action)) {
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
+                System.out.println("Proses hapus ID: " + id); // debug log
                 if (TransaksiDAO.deleteTransaksi(id) > 0) {
-                    response.sendRedirect("transaksi.jsp");
+                    System.out.println("Berhasil hapus.");
                 } else {
-                    response.sendRedirect("transaksi.jsp");
+                    System.out.println("Gagal hapus.");
                 }
+                response.sendRedirect("transaksi.jsp");
             } catch (NumberFormatException e) {
                 e.printStackTrace();
                 response.sendRedirect("transaksi.jsp");

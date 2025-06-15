@@ -192,6 +192,10 @@
                             <span class="icon"><i class="fas fa-wallet"></i></span>
                             Transactions
                         </a>
+                        <a href="tagihan">
+                            <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
+                            Tagihan
+                        </a>
                         <a href="laporan.jsp">
                             <span class="icon"><i class="fas fa-chart-simple"></i></span>
                             Laporan
@@ -200,7 +204,7 @@
                             <span class="icon"><i class="fas fa-bullseye"></i></span>
                             Target Tabungan
                         </a>
-                        <a href="#" class="active">
+                        <a href="profile.jsp" class="active">
                             <span class="icon"><i class="fas fa-user"></i></span>
                             Profile
                         </a>

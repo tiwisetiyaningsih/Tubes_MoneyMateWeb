@@ -46,7 +46,9 @@ public class TransaksiDAO {
             String sql = "DELETE FROM transaksi WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            return ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
+            System.out.println("Baris dihapus: " + rowsAffected);
+            return rowsAffected;
         } catch (SQLException e) {
             e.printStackTrace();
         }

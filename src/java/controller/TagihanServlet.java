@@ -22,14 +22,28 @@ public class TagihanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String action = request.getParameter("action");
+        
         try (Connection conn = KoneksiDB.getConnection()) {
             TagihanDAO dao = new TagihanDAO(conn);
-            List<Tagihan> list = dao.getAllTagihanWithReminder();
-request.setAttribute("tagihanList", list);
-
+            
+            if ("delete".equals(action)){
+                int id = Integer.parseInt(request.getParameter("id"));
+                dao.deleteTagihan(id);
+                System.out.println("Tagihan ID " + id + " berhasil dihapus.");
+                response.sendRedirect("tagihan");
+                return;
+            }
+            
+            HttpSession session = request.getSession();
+            int userId = (int) session.getAttribute("id");
+            List<Tagihan> list = dao.getAllTagihanWithReminder(userId);
+            request.setAttribute("tagihanList", list);
             request.getRequestDispatcher("tagihan.jsp").forward(request, response);
         } catch (Exception e) {
-            throw new ServletException("Error saat mengambil data tagihan", e);
+            e.printStackTrace();
+            throw new ServletException("Gagal memproses request di TagihanServlet", e);
         }
     }
 
@@ -47,7 +61,16 @@ request.setAttribute("tagihanList", list);
 
             java.util.Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tanggalStr);
 
-            Tagihan tagihan = new Tagihan(nama, jumlah, tanggal);
+            HttpSession session = request.getSession();
+            Integer userId = (Integer) session.getAttribute("id"); // ambil dari session
+
+            if (userId == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
+            Tagihan tagihan = new Tagihan(nama, jumlah, tanggal, userId); // ✅ ini fix-nya
+
             TagihanDAO dao = new TagihanDAO(conn);
             dao.insertTagihan(tagihan);
 

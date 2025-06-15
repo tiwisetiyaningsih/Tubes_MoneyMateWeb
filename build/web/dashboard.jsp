@@ -226,7 +226,7 @@
                             <span class="icon"><i class="fas fa-wallet"></i></span>
                             Transactions
                         </a>
-                        <a href="tagihan.jsp">
+                        <a href="tagihan">
                             <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
                             Tagihan
                         </a>
