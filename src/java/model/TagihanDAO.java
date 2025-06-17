@@ -48,20 +48,7 @@ public class TagihanDAO {
 
         return list;
     }
-//protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//        throws ServletException, IOException {
-//    try (Connection conn = KoneksiDB.getConnection()) {
-//        TagihanDAO dao = new TagihanDAO(conn);
-//        List<Tagihan> list = dao.getAllWithReminder(); // PAKAI YANG DENGAN REMINDER
-//        request.setAttribute("tagihanList", list);
-//        request.getRequestDispatcher("tagihan.jsp").forward(request, response);
-//    } catch (Exception e) {
-//        throw new ServletException("Error saat mengambil data tagihan", e);
-//    }
-//}
 
-//
-    // Tambah tagihan
     public void insertTagihan(Tagihan t) throws SQLException {
         String query = "INSERT INTO tagihan (namaTagihan, jumlahTagihan, tanggalDue, user_id) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);

@@ -1,21 +1,19 @@
 package model;
 
 public class targetTabungan {
-    private int id;  // Tambahkan ID untuk target tabungan
+    private int id;  
     private String namaTarget;
     private double jumlahTarget;
     private double jumlahdikumpulkan;
 
-    // Konstruktor tanpa tanggalTarget
     public targetTabungan() {}
 
-    // Konstruktor dengan namaTarget dan jumlahTarget
     public targetTabungan(String namaTarget, double jumlahTarget) {
         this.namaTarget = namaTarget;
         this.jumlahTarget = jumlahTarget;
-        this.jumlahdikumpulkan = 0; // Default jumlah terkumpul adalah 0
+        this.jumlahdikumpulkan = 0; 
     }
-    // Konstruktor dengan id, namaTarget, jumlahTarget, dan jumlahdikumpulkan
+    
     public targetTabungan(int id, String namaTarget, double jumlahTarget, double jumlahdikumpulkan) {
         this.id = id;
         this.namaTarget = namaTarget;
@@ -23,7 +21,6 @@ public class targetTabungan {
         this.jumlahdikumpulkan = jumlahdikumpulkan;
     }
 
-    // Getter dan Setter untuk namaTarget
     public String getNamaTarget() {
         return namaTarget;
     }
@@ -32,7 +29,6 @@ public class targetTabungan {
         this.namaTarget = namaTarget;
     }
 
-    // Getter dan Setter untuk jumlahTarget
     public double getJumlahTarget() {
         return jumlahTarget;
     }
@@ -41,7 +37,6 @@ public class targetTabungan {
         this.jumlahTarget = jumlahTarget;
     }
 
-    // Getter dan Setter untuk jumlahdikumpulkan
     public double getJumlahDikumpulkan() {
         return jumlahdikumpulkan;
     }

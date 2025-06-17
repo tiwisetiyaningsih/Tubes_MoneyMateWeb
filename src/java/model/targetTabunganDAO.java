@@ -43,23 +43,4 @@ public class targetTabunganDAO {
         }
         return targets;
     }
-
-    
-    // Method untuk memperbarui target tabungan di database
-    public void update(targetTabungan target) throws SQLException {
-        String sql = "UPDATE targettabungan SET namaTarget = ?, jumlahTarget = ?, jumlahdikumpulkan = ? WHERE id = ?";
-    
-        try (Connection conn = KoneksiDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            // Set parameter-parameter query update
-            stmt.setString(1, target.getNamaTarget()); // Nama target yang diubah
-            stmt.setDouble(2, target.getJumlahTarget()); // Jumlah target yang diubah
-            stmt.setDouble(3, target.getJumlahDikumpulkan()); // Jumlah yang terkumpul yang diubah
-            stmt.setInt(4, target.getId()); // ID target yang akan diupdate
-
-            // Eksekusi query update
-            stmt.executeUpdate();
-        }
-    }
-
-    
 }

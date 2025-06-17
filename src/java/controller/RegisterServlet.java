@@ -36,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.setString(1, username);
                 pst.setString(2, email);
-                pst.setString(3, password); // bisa di-hash nanti
+                pst.setString(3, password); 
 
                 int row = pst.executeUpdate();
                 if (row > 0) {

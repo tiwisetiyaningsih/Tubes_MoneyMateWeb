@@ -261,7 +261,7 @@
                     }
                 %>
             <h1>Target Tabungan</h1>
-            <h3 style="margin-bottom: 30px;">Daftar target keuangan Anda, <%= username%>!</h3>
+            <h3 style="margin-bottom: 30px;">Daftar target keuangan, <%= username%>!</h3>
 
             <a href="targetTabungan.jsp?add=true" class="btn-tambah"><i class="fas fa-plus-circle"></i> Tambah Target</a>
 
@@ -327,23 +327,6 @@
                 %>
             </div>
         </main>
-    </div>
-
-    <!-- Modal for Editing Target -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEditModal()">&times;</span>
-            <h2>Edit Target Tabungan</h2>
-            <form id="editTargetForm" action="targetTabungan.jsp" method="post">
-                <input type="hidden" id="editTargetName" name="editTargetName" />
-                <input type="hidden" id="editTargetId" name="editTargetId" />
-                <label for="editTargetAmount">Jumlah Target:</label>
-                <input type="number" id="editTargetAmount" name="editTargetAmount" required />
-                <label for="editCurrentAmount">Jumlah Dikumpulkan:</label>
-                <input type="number" id="editCurrentAmount" name="editCurrentAmount" required />
-                <button type="submit"><i class="fas fa-check-circle"></i> Simpan Perubahan</button>
-            </form>
-        </div>
     </div>
 
    

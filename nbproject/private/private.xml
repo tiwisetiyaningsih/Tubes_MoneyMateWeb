@@ -3,16 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/targetTabunganServlet.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/LaporanDAO.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/LaporanServlet.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/laporan.jsp</file>
             <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/transaksi.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/TransaksiServlet.java</file>
             <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/Transaksi.java</file>
             <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/TransaksiDAO.java</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/Laporan.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/laporan.jsp</file>
             <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/profile.jsp</file>
-            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/dashboard.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/targetTabungan.jsp</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/controller/targetTabunganServlet.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/targetTabunganDAO.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/src/java/model/targetTabungan.java</file>
+            <file>file:/D:/Kuliah/Semester%20IV/PBO/TUBES/MoneyMateWeb/web/tagihan.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -57,37 +57,5 @@ public class targetTabunganServlet extends HttpServlet {
             req.setAttribute("error", "Terjadi kesalahan saat mengambil data: " + e.getMessage());
             req.getRequestDispatcher("/model/target-list.jsp").forward(req, res);
         }
-    }
-     
-    // Method untuk mengedit target tabungan
-protected void editTarget(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    try {
-        int id = Integer.parseInt(req.getParameter("id"));
-        String namaTarget = req.getParameter("namaTarget");
-        double jumlahTarget = Double.parseDouble(req.getParameter("jumlahTarget"));
-        double jumlahdikumpulkan = Double.parseDouble(req.getParameter("jumlahdikumpulkan"));
-
-        // Validasi input
-        if (namaTarget == null || namaTarget.trim().isEmpty()) {
-            req.setAttribute("error", "Nama target harus diisi!");
-            req.getRequestDispatcher("/model/target-form.jsp").forward(req, res);
-            return;
-        }
-
-        // Membuat objek TargetTabungan dengan konstruktor yang sesuai
-        targetTabungan target = new targetTabungan(id, namaTarget, jumlahTarget, jumlahdikumpulkan);
-
-        // Menggunakan DAO untuk memperbarui target di database
-        targetTabunganDAO dao = new targetTabunganDAO();
-        dao.update(target);
-
-        // Redirect ke halaman daftar target setelah data diperbarui
-        res.sendRedirect(req.getContextPath() + "/targetTabunganServlet");
-
-    } catch (Exception e) {
-        req.setAttribute("error", "Terjadi kesalahan saat mengedit data: " + e.getMessage());
-        req.getRequestDispatcher("/model/target-form.jsp").forward(req, res);
-    }
-}
-    
+    }    
 }
