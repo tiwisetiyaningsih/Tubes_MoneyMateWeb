@@ -26,10 +26,9 @@ public class TransaksiDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, transaksi.getJumlah());
             ps.setString(2, transaksi.getDeskripsi());
-            // Convert java.util.Date to java.sql.Date
-            java.util.Date utilDate = transaksi.getTanggal();  // Get the Date from the Transaksi object
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  // Convert to java.sql.Date
-            ps.setDate(3, sqlDate);  // Set the date in the PreparedStatement
+            java.util.Date utilDate = transaksi.getTanggal();  
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  
+            ps.setDate(3, sqlDate);  
             ps.setString(4, transaksi.getTipe());
             ps.setInt(5, transaksi.getKategori_id());
             ps.setInt(6, transaksi.getUser_id());
@@ -77,9 +76,8 @@ public class TransaksiDAO {
     // Menambahkan metode untuk mengambil transaksi berdasarkan ID
     public static Transaksi getTransaksiById(int id) {
         Transaksi transaksi = null;
-        // Kode untuk mengakses database dan mengambil transaksi berdasarkan ID
         try {
-            Connection conn = KoneksiDB.getConnection(); // Pastikan DBHelper sudah ada dan terkoneksi
+            Connection conn = KoneksiDB.getConnection(); 
             String sql = "SELECT * FROM transaksi WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -91,7 +89,7 @@ public class TransaksiDAO {
                 transaksi.setTanggal(rs.getDate("tanggal"));
                 transaksi.setJumlah(rs.getDouble("jumlah"));
                 transaksi.setTipe(rs.getString("tipe"));
-                transaksi.setKategori_id(rs.getInt("kategori_id")); // Pastikan ada kolom kategori_id di DB
+                transaksi.setKategori_id(rs.getInt("kategori_id")); 
             }
         } catch (SQLException e) {
             e.printStackTrace();

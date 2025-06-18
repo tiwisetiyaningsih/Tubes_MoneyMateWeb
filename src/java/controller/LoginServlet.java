@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
-            e.printStackTrace(); // Penting! Lihat error-nya di log NetBeans
+            e.printStackTrace(); 
             response.sendRedirect("login.jsp?msg=error");
         }
     }

@@ -291,7 +291,7 @@
                     %>
                         <option value="<%= kategori.getId() %>"><%= kategori.getNamaKategori() %></option>
                     <% 
-                        }  // Pastikan blok 'for' ini ditutup dengan benar
+                        }  
                     %>
                 </select><br>
 
