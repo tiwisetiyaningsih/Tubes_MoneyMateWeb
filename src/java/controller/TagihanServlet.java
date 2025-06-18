@@ -69,7 +69,7 @@ public class TagihanServlet extends HttpServlet {
                 return;
             }
 
-            Tagihan tagihan = new Tagihan(nama, jumlah, tanggal, userId); // ✅ ini fix-nya
+            Tagihan tagihan = new Tagihan(nama, jumlah, tanggal, userId); 
 
             TagihanDAO dao = new TagihanDAO(conn);
             dao.insertTagihan(tagihan);
