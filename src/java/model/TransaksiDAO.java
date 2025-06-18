@@ -54,6 +54,25 @@ public class TransaksiDAO {
         }
         return 0;
     }
+    
+    public static int updateTransaksi(Transaksi transaksi) {
+        try (Connection conn = KoneksiDB.getConnection()) {
+            String sql = "UPDATE transaksi SET jumlah = ?, deskripsi = ?, tanggal = ?, tipe = ?, kategori_id = ? WHERE id = ? AND user_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, transaksi.getJumlah());
+            ps.setString(2, transaksi.getDeskripsi());
+            java.sql.Date sqlDate = new java.sql.Date(transaksi.getTanggal().getTime());
+            ps.setDate(3, sqlDate);
+            ps.setString(4, transaksi.getTipe());
+            ps.setInt(5, transaksi.getKategori_id());
+            ps.setInt(6, transaksi.getId());
+            ps.setInt(7, transaksi.getUser_id());
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     // Menambahkan metode untuk mengambil transaksi berdasarkan ID
     public static Transaksi getTransaksiById(int id) {

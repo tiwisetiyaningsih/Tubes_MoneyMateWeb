@@ -32,8 +32,7 @@ public class Transaksi {
         this.user_id = user_id;
     }
 
-    Transaksi() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Transaksi() {
     }
 
     // Getter dan Setter

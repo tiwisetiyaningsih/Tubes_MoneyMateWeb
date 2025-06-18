@@ -1,19 +1,21 @@
 package model;
 
 public class targetTabungan {
-    private int id;  
+
+    private int id;  // Tambahkan ID untuk target tabungan
     private String namaTarget;
     private double jumlahTarget;
     private double jumlahdikumpulkan;
 
-    public targetTabungan() {}
+    public targetTabungan() {
+    }
 
     public targetTabungan(String namaTarget, double jumlahTarget) {
         this.namaTarget = namaTarget;
         this.jumlahTarget = jumlahTarget;
-        this.jumlahdikumpulkan = 0; 
+        this.jumlahdikumpulkan = 0;
     }
-    
+
     public targetTabungan(int id, String namaTarget, double jumlahTarget, double jumlahdikumpulkan) {
         this.id = id;
         this.namaTarget = namaTarget;
@@ -45,7 +47,6 @@ public class targetTabungan {
         this.jumlahdikumpulkan = jumlahdikumpulkan;
     }
 
-    // Getter dan Setter untuk id
     public int getId() {
         return id;
     }

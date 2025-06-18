@@ -32,6 +32,7 @@
 
     List<Transaksi> transaksiListByFilter = TransaksiDAO.getTransaksiByUserAndFilter(userId, month, year, filterTipe);
 %>
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -405,6 +406,50 @@
                         <button type="submit" style="background:#8d83ff; color:#fff; border:none; border-radius:8px; padding:8px 25px;">Filter</button>
                     </form>
                 </div>
+                
+                        <%
+                            Transaksi t = (Transaksi) request.getAttribute("transaksi");
+                            if (t != null) {
+                                List<Kategori> kategori = KategoriDAO.getAllKategori();
+                        %>
+                        <!-- Form untuk mengedit target tabungan -->
+                        <div class="form-container card" style="margin-top: 20px;">
+                            <h2>Edit Transaksi</h2>
+                            <form action="TransaksiServlet" method="post">
+                                <input type="hidden" name="action" value="update" />
+                                <input type="hidden" name="id" value="<%= t.getId()%>" />
+
+                                <label>Judul:</label>
+                                <input type="text" name="deskripsi" value="<%= t.getDeskripsi()%>" required 
+                                       style="width:100%; padding:8px; margin-bottom:10px;"/>
+
+                                <label>Tanggal:</label>
+                                <input type="date" name="tanggal" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(t.getTanggal())%>" required 
+                                       style="width:100%; padding:8px; margin-bottom:10px;"/>
+
+                                <label>Jumlah:</label>
+                                <input type="number" name="jumlah" value="<%= String.format("%.0f", t.getJumlah())%>" required 
+                                       style="width:100%; padding:8px; margin-bottom:10px;"/>
+
+                                <label>Tipe:</label>
+                                <select name="tipe" required style="width:100%; padding:8px; margin-bottom:10px;">
+                                    <option value="Pemasukan" <%= "Pemasukan".equals(t.getTipe()) ? "selected" : ""%>>Pemasukan</option>
+                                    <option value="Pengeluaran" <%= "Pengeluaran".equals(t.getTipe()) ? "selected" : ""%>>Pengeluaran</option>
+                                </select>
+
+                                <label>Kategori:</label>
+                                <select name="kategori_id" required style="width:100%; padding:8px; margin-bottom:10px;">
+                                    <% for (Kategori k : kategori) {
+                                            String selected = (t.getKategori_id() == k.getId()) ? "selected" : "";
+                                    %>
+                                    <option value="<%= k.getId()%>" <%= selected%>><%= k.getNamaKategori()%></option>
+                                    <% } %>
+                                </select>
+
+                                <button type="submit" style="background:#8d83ff; color:#fff; border:none; border-radius:8px; padding:8px 25px;"><i class="fas fa-check-circle"></i> Simpan Perubahan</button>
+                            </form>
+                        </div>
+                        <% }%>
 
                 <!-- Daftar Transaksi -->
                 <div class="card" style="margin-top: 20px;">
@@ -444,6 +489,7 @@
                         </div>
                         <div class="amount <%= amountClass %>"><%= sign %>Rp <%= String.format("%,d", (int) absAmount) %>.00</div>
                         <div>
+                            <a href="TransaksiServlet?action=editForm&id=<%= transaksi.getId()%>">Edit</a>
                             <!-- Link delete -->
                             <a href="TransaksiServlet?action=delete&id=<%= transaksi.getId()%>" onclick="return confirm('Hapus transaksi ini?')">Hapus</a>
                         </div>
